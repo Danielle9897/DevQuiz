@@ -1,0 +1,77 @@
+﻿@model DevQuiz.Areas.Admin.ViewModels.QuestionViewModel
+
+@{
+    ViewBag.Title = "Edit Question";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    string categoryName = ViewBag.CategoryName;
+}
+
+<ol class="breadcrumb">
+    <li>@Html.ActionLink("Admin Home", "Index", "Home")</li>
+    <li>@Html.ActionLink("Categories", "Index", "Categories")</li>
+    <li>@Html.ActionLink(categoryName, "Index", "SubCategories", new { id = ViewBag.CategoryId }, null)</li>
+    <li>@Html.ActionLink(@Model.SubCategoryName, "Index", "Questions", new { id = Model.SubCategoryId }, null)</li>
+    <li class="active">Edit Question</li>
+</ol>
+<hr />
+
+<h2>Edit Question</h2><br />
+
+@* Show a bootstrap alert:
+    For errors coming back from the server side,
+    (errors that were not checked by client javascript prior to posting to server) *@
+@if (!ViewData.ModelState.IsValid)
+{
+    <div class="alert alert-danger alert-dismissible fade in" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        @Html.ValidationSummary(true, "Please fix errors")
+    </div>
+}
+
+@* A bootstrap alert for errors checked by javascript on client side prior to posting to server *@
+<div class="alert alert-danger clientValidationSummary fade in hidden" role="alert">
+    <button type="button" class="close my-alert-close" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+    <span class="msg"></span>
+</div>
+
+@using (Html.BeginForm("Edit", "Questions", FormMethod.Post, new { @class = "questionForm" }))
+{
+
+        @Html.AntiForgeryToken()
+
+        <div class="form-group">
+            <div>
+                <input type="submit" value="Save Changes" class="btn btn-default btn-lg btn-create-color" />
+                @Html.ActionLink("Cancel", "Index", "Questions", new { id = Model.SubCategoryId }, new { @class = "btn btn-default btn-lg" })
+            </div>
+        </div>
+
+        <div class="form-horizontal">
+       
+        @Html.HiddenFor(model => model.QuestionId)
+        @Html.HiddenFor(model => model.SubCategoryId) 
+        @Html.HiddenFor(model => model.SubCategoryName)    
+
+        @*************************************************@       
+
+        @{ Html.RenderPartial("_QuestionDetails", Model); }       
+
+        @*************************************************@
+
+        <br />
+        <div class="form-group">
+            <div class="col-md-offset-4">
+                <input type="submit" value="Save Changes" class="btn btn-default btn-lg btn-create-color" />
+                @Html.ActionLink("Cancel", "Index", "Questions", new { id = Model.SubCategoryId }, new { @class = "btn btn-default btn-lg" })                
+            </div>
+        </div>
+
+    </div>
+}
+
+
+

@@ -1,0 +1,207 @@
+﻿@model DevQuiz.Areas.Admin.ViewModels.QuestionViewModel
+
+
+@***** Title *****@
+<div class="form-group">       
+        @Html.LabelFor(model => model.QuestionTitle, htmlAttributes: new { @class = "control-label col-md-3" })    
+        <div class="col-md-6">
+                @Html.EditorFor(model => model.QuestionTitle, new { htmlAttributes = new  { @class = "form-control admin-form-control",
+                                                                                            @placeholder = "Enter short title",
+                                                                                            @title = "A short descriptive title, Admin usage only",
+                                                                                            @autofocus = "autofocus",
+                                                                                            data_toggle = "tooltip",
+                                                                                            data_placement = "right" } })  
+                @Html.ValidationMessageFor(model => model.QuestionTitle, "", new { @class = "label label-danger" })
+        </div>       
+</div>
+
+@***** Question Number *****@
+<div class="form-group">
+    @Html.LabelFor(model => model.QuestionNumber, htmlAttributes: new { @class = "control-label col-md-3" })
+    <div class="col-md-6">
+                 @Html.EditorFor(model => model.QuestionNumber, new { htmlAttributes = new { @class = "form-control admin-form-control",
+                                                                                             @min = "1",
+                                                                                             @max = "2000",
+                                                                                             @title = "Question order in the quiz (1 up to 2000)",
+                                                                                             data_toggle = "tooltip",
+                                                                                             data_placement = "right"
+                                                                                           } })        
+                 @Html.ValidationMessageFor(model => model.QuestionNumber, "", new { @class = "label label-danger" })
+    </div>
+</div>
+
+@***** Level *****@
+<div class="form-group">
+    @Html.LabelFor(model => model.QuestionLevel, htmlAttributes: new { @class = "control-label col-md-3" })
+    <div class="col-md-6">
+        @Html.EditorFor(model => model.QuestionLevel, new { htmlAttributes = new { @class = "form-control admin-form-control",
+                                                                                   @min = "1",
+                                                                                   @max = "3",
+                                                                                   @title = "1=novice 2=intermediate 3=expert",
+                                                                                   data_toggle = "tooltip",
+                                                                                   data_placement = "right"
+                                                                                 } })
+        @Html.ValidationMessageFor(model => model.QuestionLevel, "", new { @class = "label label-danger" })
+    </div>
+</div>
+
+@***** Time *****@
+<div class="form-group">
+    @Html.LabelFor(model => model.TimeToAnswer, htmlAttributes: new { @class = "control-label col-md-3" })
+    <div class="col-md-6">
+        @Html.EditorFor(model => model.TimeToAnswer, new { htmlAttributes = new { @class = "form-control admin-form-control",
+                                                                                  @title = "Time in seconds user can answer the question, 0 = no limit",
+                                                                                  data_toggle = "tooltip",                                                                                 
+                                                                                  data_placement = "right"
+                                                                                } })
+        @Html.ValidationMessageFor(model => model.TimeToAnswer, "", new { @class = "label label-danger" })
+    </div>
+</div>
+
+@***** Points *****@
+<div class="form-group">
+    @Html.LabelFor(model => model.CreditPoints, htmlAttributes: new { @class = "control-label col-md-3" })
+    <div class="col-md-6">
+        @Html.EditorFor(model => model.CreditPoints, new { htmlAttributes = new { @class = "form-control admin-form-control",
+                                                                                  @min = "1",
+                                                                                  @title = "Credits points",
+                                                                                  data_toggle = "tooltip",
+                                                                                  data_placement = "right"
+                                                                                } })
+        @Html.ValidationMessageFor(model => model.CreditPoints, "", new { @class = "label label-danger" })
+    </div>
+</div>
+
+@***** Text/Body 1 - Original *****@
+@*<div class="form-group form-group-sm">
+        @Html.LabelFor(model => model.QuestionText, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.QuestionText, new { htmlAttributes = new { @class = "form-control admin-form-control",
+                                                                                      @placeholder = "Enter question body",
+                                                                                      @title = "The question itself",
+                                                                                      data_toggle = "tooltip",
+                                                                                      data_placement = "right"
+                                                                                    } })
+            @Html.ValidationMessageFor(model => model.QuestionText, "", new { @class = "label label-danger" })
+        </div>
+    </div>*@
+
+@***** Text/Body 2 - using tinyMCE !!! *****@
+<br />
+<div class="form-group">
+    @Html.LabelFor(model => model.QuestionText, htmlAttributes: new { @class = "control-label col-md-3" })
+    <div class="col-md-6">
+        <div class="editable-tinyMCE-questionText admin-form-control tinyMCE-control answer-text" id="QuestionText" name="QuestionText"
+             data-toggle="tooltip" data-placement="right" title="The question itself" placeholder="Enter question body">
+            @Html.Raw(Model.QuestionText)
+        </div>
+        @Html.ValidationMessageFor(model => model.QuestionText, "", new { @class = "label label-danger", id="QuestionTextValidationMessage" })
+    </div>
+</div>
+
+@***** Answers 1 - Original *****@
+@*@for (int i = 0; i < Model.AnswersList.Count; i++)
+{
+    <div class="form-group form-group-sm">
+        @Html.Label("Answer " + (i + 1).ToString(), htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10 answer-item">
+
+            @Html.EditorFor(modelitem => Model.AnswersList[i].AnswerText, null, new { htmlAttributes = new { @class = "form-control answer-text admin-form-control",
+                                                                                                             @placeholder = "Enter answer text",
+                                                                                                             @title = "An answer",
+                                                                                                             data_toggle = "tooltip",
+                                                                                                             data_placement = "right"
+                                                                                                           } })
+
+            <span title="Mark at least one answer as correct !" data-toggle="tooltip" data-placement="left" >               
+                @Html.CheckBoxFor(modelitem => Model.AnswersList[i].IsCorrect, new { disabled = "true",
+                                                                                     @class = "checkbox is-correct-checkbox" }) Is correct
+            </span>           
+
+            @Html.ValidationMessageFor(modelitem => Model.AnswersList[i].AnswerText, "", new { @class = "label label-danger" })
+        </div>
+    </div>
+}*@
+
+@***** Answers 2 - using tinyMCE !!! *****@
+<br />
+@for (int i = 0; i < Model.AnswersList.Count; i++)
+{
+    // Immitate the id & name attributes as if the 'EditorFor' would have created them..    
+    string textareaIdString   = String.Format("AnswersList_{0}__AnswerText", i.ToString());
+    string textareaNameString = String.Format("AnswersList[{0}].AnswerText", i.ToString());
+    string divIdString = "div_" + i.ToString();
+
+        <div class="form-group">
+            @Html.Label("Answer " + (i + 1).ToString(), htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-6 answer-item">
+
+                @*textarea patch*@
+                <textarea id="@textareaIdString" name="@textareaNameString" class="hidden"></textarea>
+
+                <div class="editable-tinyMCE-answer admin-form-control tinyMCE-control answer-text"                    
+                     id="@divIdString"
+                     placeholder="Enter answer text"
+                     data-toggle="tooltip" data-placement="right" title="An answer">                    
+                     @Html.Raw(Model.AnswersList[i].AnswerText)
+                </div>
+
+                <span title="Mark at least one answer as correct !" data-toggle="tooltip" data-placement="left">
+                    @{
+                        // Detect if isCorrect checkbox should appear disabled or not
+                        if (String.IsNullOrWhiteSpace(Model.AnswersList[i].AnswerText))
+                        {
+                            @Html.CheckBoxFor(modelitem => Model.AnswersList[i].IsCorrect, new { @disabled = "true", @class = "checkbox is-correct-checkbox" })
+                        }
+                        else
+                        {
+                            @Html.CheckBoxFor(modelitem => Model.AnswersList[i].IsCorrect, new { @class = "checkbox is-correct-checkbox" })
+                        }
+                    }
+                </span> Is correct
+
+                @Html.ValidationMessageFor(modelitem => Model.AnswersList[i].AnswerText, "", new { @class = "label label-danger" })
+            </div>
+        </div>
+        }
+
+        @***** Image - Not used for now at all... *****@
+        @*<div class="form-group form-group-sm">
+                @Html.LabelFor(model => model.RelatedImage, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.RelatedImage, new { htmlAttributes = new { @class = "form-control admin-form-control",
+                                                                                              @title = "An optional image",
+                                                                                              @disabled = "disabled",
+                                                                                              data_toggle = "tooltip",
+                                                                                              data_placement = "right",
+                                                                                            } })
+
+                    @Html.ValidationMessageFor(model => model.RelatedImage, "", new { @class = "label label-danger" })
+                </div>
+            </div>*@
+
+        @***** Explanation 1 - Original *****@
+        @*<div class="form-group form-group-sm">
+                @Html.LabelFor(model => model.Explanation, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Explanation, new { htmlAttributes = new { @class = "form-control input-sm admin-form-control",
+                                                                                             @title = "Explanation to question",
+                                                                                             data_toggle = "tooltip",
+                                                                                             data_placement = "right"
+                                                                                           } })
+                    @Html.ValidationMessageFor(model => model.Explanation, "", new { @class = "label label-danger" })
+                </div>
+            </div>*@
+
+        @***** Explanation 2 - using tinyMCE !!! *****@
+        <div class="form-group">
+            @Html.LabelFor(model => model.Explanation, htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-6">
+                <div class="editable-tinyMCE-explanation admin-form-control tinyMCE-control" id="Explanation" name="Explanation"
+                     data-toggle="tooltip" data-placement="right" title="Explanation to question">
+                    @Html.Raw(Model.Explanation)
+                </div>
+                @Html.ValidationMessageFor(model => model.Explanation, "", new { @class = "label label-danger" })
+            </div>
+        </div>
+

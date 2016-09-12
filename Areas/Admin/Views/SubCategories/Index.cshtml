@@ -1,0 +1,70 @@
+﻿@model IEnumerable<DevQuiz.Models.SubCategory>
+
+@{
+    ViewBag.Title = "Sub-Categories List";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<ol class="breadcrumb">      
+    <li>@Html.ActionLink("Admin Home", "Index", "Home")</li>
+    <li>@Html.ActionLink("Categories", "Index", "Categories")</li>     
+    <li class="active">@ViewBag.CategoryName</li>
+</ol>
+<hr />
+
+<h2>@ViewBag.CategoryName Sub-Categories</h2> 
+<br />   
+
+@Html.ActionLink("Create New Sub-Category", "Create", "SubCategories", new { id = ViewBag.CategoryId }, 
+                                                                       new { @class = "btn btn-lg btn-default btn-create-color" })
+<br />
+<br />
+
+<div class="table-responsive">
+    <table class="table table-bordered table-hover table-condensed admin-table-background">
+
+        <tr>
+            <th>
+                @Html.DisplayName("Sub-Category Name")
+            </th>
+            <th>
+                @Html.DisplayName("User with top score")
+            </th>
+            <th>
+                @Html.DisplayName("Top Score")
+            </th>
+            <th>
+                @Html.DisplayName("Actions")
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {           
+            <tr>
+                <td>                   
+                    @Html.ActionLink(item.SubCategoryName, "Index", "Questions", new { id = item.SubCategoryId }, null)
+                </td>                                                                 
+                
+                    @{
+                        if (string.IsNullOrEmpty(item.UserWithTopScore))
+                        {
+                           <td>---</td>
+                        }
+                        else
+                        {
+                            <td>@Html.ActionLink(item.UserWithTopScore, "UserInfo", "Users", new { data = item.UserWithTopScore }, null)</td>
+                        }
+                    }
+               
+                <td>
+                    @Html.DisplayFor(modelItem => item.TopScore)
+                </td>
+                <td>
+                    @Html.ActionLink("Rename", "Edit", new { id = item.SubCategoryId }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.SubCategoryId })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

@@ -1,0 +1,37 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<br />
+
+<div class="jumbotron">
+    <div class="row">
+        <div class="text-center">           
+                <img id="QuizImage" src="~/Images/QuizTime.jpg" class="img-responsive img-rounded img-thumbnail" alt="Responsive image">
+            </div>
+            @*<div class="col-sm-7" >
+                <br /><br /><br /><br />
+                <h1 class="text-center">Software Developer</h1>
+                <h1 class="text-center">Quiz</h1>
+                <p class="text-center">Test your skills in any category</p>
+            </div>*@
+        </div>
+</div>
+
+<br /><br />
+
+<div class="row">
+    <a id="GoButton" href="@Url.Action("Index", "Quiz")" class="btn btn-lg btn-primary btn-wide focus col-xs-offset-3 col-xs-6 ">
+        <span class="hidden-xs">Test your skills -</span> Go
+        <span class="icon-go" aria-hidden="true"></span> 
+    </a>
+</div>
+
+<div class="row">
+    <div class="text-center">
+        <br />
+        @Html.ActionLink(" Sign in to get started", "Login", "Account") /
+        @Html.ActionLink("Register", "Register", "Account")
+    </div>
+</div>
+

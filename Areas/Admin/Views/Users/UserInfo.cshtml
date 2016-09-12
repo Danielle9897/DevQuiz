@@ -1,0 +1,106 @@
+﻿@model DevQuiz.Areas.Admin.ViewModels.UserFullDetailsViewModel
+
+@{
+    ViewBag.Title = "User Details";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";    
+}
+
+<ol class="breadcrumb">
+    <li>@Html.ActionLink("Admin Home", "Index", "Home")</li>
+    <li>@Html.ActionLink("Users", "Index", "Users")</li>
+    <li class="active">User Details</li>
+</ol>
+<hr />
+
+@{ 
+    string address = Model.Address;
+    if (string.IsNullOrWhiteSpace(address))
+    {
+        address = "---";
+    }
+    string phone = Model.Phone;
+    if (string.IsNullOrWhiteSpace(phone))
+    {
+        phone = "---";
+    }
+    string fName = Model.FirstName;
+    if (string.IsNullOrWhiteSpace(fName))
+    {
+        fName = "---";
+    }
+    string lName = Model.LastName;
+    if (string.IsNullOrWhiteSpace(lName))
+    {
+        lName = "---";
+    }
+    string name = Model.FirstName + " " + Model.LastName;
+    if (string.IsNullOrWhiteSpace(name))
+    {
+        name = Model.Email;
+    }
+}
+
+<h3>Details for: <strong>@name</strong></h3><br />
+
+<div class="row">
+
+    <div class="col-sm-4">
+
+        <div class="panel panel-default panel-info">            
+            <div class="panel-heading"><strong>Personal Details</strong></div>
+            
+            <div class="table-responsive">
+                <table class="table table-condensed">
+                    <tr><td>Name:</td><td><strong>@fName</strong></td></tr>
+                    <tr><td>Last Name:</td><td><strong>@lName</strong></td></tr>
+                    <tr><td>Address:</td><td><strong>@address</strong></td></tr>
+                    <tr><td>Phone:</td><td><strong>@phone</strong></td></tr>
+                    <tr><td>Email:</td><td><strong>@Model.Email</strong></td></tr>
+                </table>
+            </div>
+
+            <div class="panel-footer"></div>
+        </div>
+
+    </div>
+
+    <div class="col-sm-8">
+
+        <div class="panel panel-default panel-info">
+            <div class="panel-heading"><strong>Last Quizes Taken</strong></div>
+
+            <div class="table-responsive">
+                <table class="table table-condensed">
+
+                    <tr>
+                        <th>Date</th>
+                        <th>Category</th>
+                        <th>SubCategory</th>
+                        <th>Score</th>
+                    </tr>
+                    @{
+                        foreach (var item in Model.ListOfQuizesTaken)
+                        {
+                            <tr>
+                                <td>@item.TimeQuizTaken</td>
+                                <td>@item.Category</td>
+                                <td>@item.SubCategory</td>
+                                <td>@item.UserScore</td>
+                            </tr>
+                        }
+                    }
+
+                </table>
+            </div>
+
+                <div class="panel-footer"></div>
+            </div>
+
+    </div>
+</div>
+
+<br /><br /><br /><br />
+
+
+
+

@@ -1,0 +1,66 @@
+﻿@model IEnumerable<DevQuiz.Areas.Admin.ViewModels.UserPartialDetailsViewModel>
+
+@{
+    ViewBag.Title = "Users List";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<ol class="breadcrumb">
+    <li>@Html.ActionLink("Admin Home", "Index", "Home")</li>
+    <li class="active">Users</li>
+</ol>
+<hr />
+
+<h2>Users List</h2>
+<br /><br />
+
+<div class="table-responsive">
+    <table class="table table-bordered table-hover table-condensed admin-table-background">
+
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstName)                
+            </th>           
+            <th>                
+                @Html.DisplayNameFor(model => model.Email)               
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            if (item.Email != "AdminUser@admin.com") 
+            {
+                string name = "---";
+                string email = "---";
+
+                if (!string.IsNullOrWhiteSpace(item.FirstName))
+                {
+                    name = item.FirstName;
+                }
+                if (!string.IsNullOrWhiteSpace(item.LastName))
+                {
+                    name += (" " + item.LastName);
+                }
+                if (!string.IsNullOrWhiteSpace(item.Email))
+                {
+                    email = item.Email;
+                }
+
+                <tr>
+                    <td>
+                        @Html.ActionLink(name, "UserInfo", "Users", new { data=item.Email }, null)
+                    </td>
+                    <td>
+                        @Html.ActionLink(email, "UserInfo", "Users", new { data=item.Email }, null)
+                    </td>
+                </tr>
+            }
+        }
+
+    </table>
+</div>
+
+
+
+
+

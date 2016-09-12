@@ -1,0 +1,30 @@
+﻿@{
+    ViewBag.Title = "Admin Home";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Welcome to Admin area !</h2>
+<br /><br />
+<br /><br />
+
+<div class="row">
+    @Html.ActionLink("Manage Quiz Data", "index", "Categories", 
+                                  new { area = "Admin" }, 
+                                  new { @class = "btn btn-lg btn-default btn-huge col-sm-offset-4 col-sm-4 col-xs-12" })    
+</div>
+
+<br /><br />
+
+<div class="row">   
+    @Html.ActionLink("View Users Data", "index", "Users", 
+                                  new { area = "Admin" }, 
+                                  new { @class = "btn btn-lg btn-default btn-huge col-sm-offset-4 col-sm-4 col-xs-12" })
+</div>
+
+<br /><br />
+<br /><br />
+
+
+
+
+

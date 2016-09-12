@@ -1,0 +1,60 @@
+﻿@model IEnumerable<DevQuiz.Models.Question>
+
+@{
+    ViewBag.Title = "Questions List";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    string categoryName = ViewBag.CategoryName;
+}
+
+
+<ol class="breadcrumb">
+    <li>@Html.ActionLink("Admin Home", "Index", "Home")</li>
+    <li>@Html.ActionLink("Categories", "Index", "Categories")</li>
+    <li>@Html.ActionLink(categoryName, "Index", "SubCategories", new { id = ViewBag.CategoryId }, null)</li>
+    <li class="active">@ViewBag.SubCategoryName</li>
+</ol>
+<hr />
+
+<h2>@ViewBag.SubCategoryName Questions List</h2>
+<br />
+
+@Html.ActionLink("Create New Question", "Create", "Questions", new { id = ViewBag.SubCategoryId }, 
+                                                               new { @class = "btn btn-lg btn-default btn-create-color" })
+<br />
+<br />
+
+<div class="table-responsive">
+    <table class="table table-bordered table-hover table-condensed admin-table-background">
+
+        <tr>
+            <th> @Html.DisplayName("Question Number") </th>
+            <th> @Html.DisplayName("Title") </th>
+            <th> @Html.DisplayName("Text") </th>
+            <th> @Html.DisplayName("Time") </th>
+            <th> @Html.DisplayName("Points") </th>
+            <th> @Html.DisplayName("Level") </th>
+            <th> @Html.DisplayName("Actions") </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            string destination = "/Admin/Questions/Edit/" + item.QuestionId;
+
+            <tr>
+                <td> @Html.DisplayFor(modelItem => item.QuestionNumber) </td>
+                <td> @Html.ActionLink(item.QuestionTitle, "Edit", "Questions", new { id = item.QuestionId }, null) </td>
+
+                @*<td> @Html.ActionLink(item.QuestionText, "Edit", "Questions", new { id = item.QuestionId }, null) </td>*@
+                @* ActionLInk does not work with the raw html so I used the <a> bellow... *@
+                <td> <a class="QuestionTextInIndexList" href=@destination>@Html.Raw(item.QuestionText)</a> </td>
+
+                <td> @Html.DisplayFor(modelItem => item.TimeToAnswer) </td>
+                <td> @Html.DisplayFor(modelItem => item.CreditPoints) </td>
+                <td> @Html.DisplayFor(modelItem => item.QuestionLevel) </td>
+                <td> @Html.ActionLink("Delete", "Delete", new { id = item.QuestionId }) </td>
+            </tr>
+        }
+
+    </table>
+</div>
+

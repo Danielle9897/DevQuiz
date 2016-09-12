@@ -1,0 +1,34 @@
+﻿@model DevQuiz.Areas.Admin.ViewModels.QuestionViewModel
+
+@{
+    ViewBag.Title = "Delete Question";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    string categoryName = ViewBag.CategoryName;
+}
+
+<ol class="breadcrumb">
+    <li>@Html.ActionLink("Admin Home", "Index", "Home")</li>
+    <li>@Html.ActionLink("Categories", "Index", "Categories")</li>
+    <li>@Html.ActionLink(categoryName, "Index", "SubCategories", new { id = ViewBag.CategoryId }, null)</li>
+    <li>@Html.ActionLink(@Model.SubCategoryName, "Index", "Questions", new { id = @Model.SubCategoryId }, null)</li>
+    <li class="active">Delete</li>
+</ol>
+<hr />
+
+<h2>Delete Quesion: @Model.QuestionTitle </h2>
+<h3>Are you sure you want to delete this question ?</h3>
+<h4>Note: This will delete the question along with its answers..</h4>
+<br />
+
+<div>   
+    @using (Html.BeginForm()) {
+
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.QuestionId)
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default btn-create-color" /> 
+            @Html.ActionLink("Cancel", "Index", "Questions", new { id = Model.SubCategoryId }, new { @class = "btn btn-default" })                       
+        </div>
+    }
+</div>

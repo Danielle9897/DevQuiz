@@ -1,0 +1,386 @@
+﻿body {
+    padding-top: 70px;
+    padding-bottom: 20px;    
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+/*input,
+select,
+textarea {    
+    max-width: 500px;
+}*/
+
+/*****************************************/
+/*  My additions - used in ADMIN view    */
+/*****************************************/
+
+.admin-form-control {
+    background-color: whitesmoke;
+}
+
+.admin-form-control:focus {
+    border: #7d56d0 solid 2px;    
+}
+
+.admin-navbar-background {
+    /*background-color: #c5b3b1;*/    
+    background-color: #947792;    
+}
+
+.admin-well-lg, .btn-primary  {
+    background-color: rgb(98, 150, 183);
+    /*background-color: #3a86b7;*/
+    /*background-color: #6b9bba;*/
+}
+
+.admin-table-background {
+    background-color: #faf5f5;   
+}
+
+.admin-link {
+    color: whitesmoke;
+}
+
+/*.admin-link:hover {
+    color: blueviolet; 
+}*/
+
+/*override the hover color for tables rows...*/
+.table tbody tr:hover td,
+.table tbody tr:hover th {
+    /*background-color: #fbe4e4;*/
+    background-color:#e8e5e5;
+}
+
+.btn-create-color {
+    background-color: #bfefd2;    
+}
+
+.btn-create-color:focus {
+   background-color: #bfefd2;  
+}
+
+.btn-create-color:hover  {
+    background-color: #7dcaa7;    
+}
+
+.tooltip > .tooltip-inner { background-color: #8367be; border: 1px solid #4c347d; min-width: 150px; }
+.tooltip.right > .tooltip-arrow { border-right-color: #4c347d; }
+.tooltip.bottom > .tooltip-arrow {border-bottom-color: #4c347d; }
+
+.tinyMCE-control {
+    /*background-color: rgb(213, 232, 255);*/    
+    background-color: whitesmoke;
+    border-radius: 4px;
+    min-height: 35px
+}
+
+.answer-text {
+    /*background-color: aliceblue;*/
+    background-color: rgb(213, 232, 255);
+    /*background-color:rgb(208, 232, 240);*/
+    border-radius: 4px;
+}
+
+#GoToSiteButton:hover {          
+     background-color: #e6e6e6;
+     border-color: #adadad;
+}
+
+#GoToSiteButton {
+     background-color: #fff;
+     border-color: #ccc;
+}
+
+#ChangeAccountSettings, #PersonalDetails {
+    background-color: #c0dec0;
+}
+
+/**************************************/
+/*       My additions - general       */
+/**************************************/
+
+html {
+    height: 100%;
+}
+
+#admin-body {
+    height: 100%;    
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-image: linear-gradient(to bottom, lightblue, white );
+}
+
+#user-body {
+    height: 100%;    
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-image: linear-gradient(to bottom, #63838c, white );
+    /*background-image: linear-gradient(to bottom, rgba(2, 56, 48, 0.55), white );*/
+    /*background-image: linear-gradient(to bottom, rgba(115, 134, 79, 0.69), white );*/
+    /*background-image: linear-gradient(to bottom, rgba(129, 146, 96, 0.67), white );*/
+    /*background-image: linear-gradient(to bottom, rgba(180, 204, 174, 0.92), white );*/
+    /*background-image: linear-gradient(to bottom,  #dff0d8, white );*/   
+}
+
+@media (min-width: 1200px) {
+  .container {
+    width: 1300px;       
+  }
+}
+
+.btn-huge {
+    padding: 30px;
+    /*padding-top:20px;
+    padding-bottom:20px;*/
+}
+
+.btn-wide {
+     padding-top: 30px;
+     padding-bottom: 30px;     
+}
+
+#QuizImage {
+     width: 100%;
+     height: 100%;
+}
+
+.jumbotron {
+    background-color: rgba(0, 0, 0, .075);
+}
+
+/************************************************/
+/* My additions - styles for validation helpers */
+/************************************************/
+
+.field-validation-error {
+   /*color: red;*/   
+}
+
+.validation-summary-errors {
+    /*color: red;*/       
+}
+
+.validation-summary-valid { 
+    display:none;
+}
+
+.input-validation-error {
+    border: 2px solid red;    
+}
+
+/*******************************/
+/* My additions - User Area    */
+/*******************************/
+
+#SubCategoryChosen {
+    color: #337ab7;
+    padding-left: 40px;
+}
+
+/* For the user subjects menu - copied from http://www.bootply.com/uBoT3zP1P2#   */
+.list-group.panel > .list-group-item {  
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.user-container {
+    background-color: rgba(7, 58, 8, 0.26);
+    height: 100%;
+}
+
+#QuestionAreaDiv {
+    background-color: lightgoldenrodyellow;
+    /*height: 700px;*/ /* change ??? */  
+    min-height: 600px; 
+}
+
+#QuestionPanelArea {
+    /*height: 600px;*/ /* change ??? */   
+    min-height: 500px;
+    position: relative;       
+}
+
+.myCenter {
+    position: absolute;
+    top: 50%;
+    left:50%;
+    transform: translate(-50%,-50%); 
+}
+
+.answer-hover {  
+    border: #ababf7 solid 1px;     
+    /*border: #d9bfbf solid 1px;*/ 
+        
+    background-color: #f3ebeb; 
+    /*background-color: rgba(243, 235, 235, 0.71);*/   
+    /*box-shadow: 0px 0px 5px 1px #ababf7;*/
+}
+
+#GoButton {
+    background: rgb(6, 109, 175);
+    -webkit-transition:background 3s;
+    -moz-transition:background 3s;
+    -o-transition:background 3s;
+    transition:background 3s;
+}
+#GoButton:hover {
+    /*background: #6f4d96;*/
+    background: #044e7b;
+}
+
+.dropdown-menu {
+    width: 100%; 
+}
+
+.correct-answer {   
+    /*background-color: #5ace9f;*/
+    border: #5ace9f solid 2px;      
+    /*box-shadow: 0px 0px 5px 1px #5ace9f;*/
+}
+.wrong-answer {   
+    /*background-color: rgb(222, 103, 103);*/
+    border: rgb(222, 103, 103) solid 2px;   
+
+    /*-webkit-box-shadow: 0px 0px 10px 3px rgba(255,0,13,1);
+    -moz-box-shadow: 0px 0px 10px 3px rgba(255,0,13,1);
+     box-shadow: 0px 0px 10px 3px rgba(255,0,13,1);
+     box-shadow: 0px 0px 5px 1px rgb(222, 103, 103);*/
+}
+
+.question-well {
+    /*background-color: #e8e5e5;*/
+    /*background-color: white;
+    border: none;*/
+}
+
+.answer-well {
+    /*background-color: white;*/
+}
+
+.dropdown-menu > .disabled > a {
+ pointer-events: none;
+}
+
+.correct-color {
+    /*color: limegreen;*/
+    color: #5ace9f;
+}
+
+.correct-bg-color {   
+    background-color: rgb(223, 240, 216);
+}
+
+.wrong-color {
+    /*color: red;*/
+    color: rgb(222, 103, 103);
+}
+
+.wrong-bg-color {   
+    background-color: rgb(251, 223, 223);
+}
+
+.natural-bg-color {
+    background-color: whitesmoke;
+}
+.result-answer {
+    border: #e3e3e3 solid 1px;
+    margin: 10px;
+}
+
+.result-correct-answer {
+    border: #d5e2dd solid 1px;
+}
+
+.result-wrong-answer {
+    border: #f9d0f6 solid 1px;
+}
+
+.result-explanation, .result-question {
+    margin: 10px;
+    border: #e3e3e3 solid 1px;
+    background-color: rgb(223, 229, 232);
+}
+
+.result-well, .question-well, #ExplenationArea {
+    background-color: rgb(223, 229, 232);
+}
+
+.result-icon {
+    float: right;
+}
+
+/****************************/
+/* My additions - Loader    */
+/****************************/
+
+/*green pink grey yello circle loader*/
+/*#Loader {
+    border: 10px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 10px solid #74bc5c;    
+    border-right: 10px solid #ee7777;   
+    border-bottom: 10px solid #97abb4;  
+    border-left: 10px solid #ffdb4d;    
+    width: 80px;
+    height: 80px; 
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+    margin-top: 100px;    
+}
+@-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+}
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}*/
+
+/* This was for usage by the covering loader modal div - NOT used now */
+.loader-modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    /*background: rgba( 210, 210, 210, .6 )*/
+    background: rgba(230, 230, 230, .6)
+                url('../Images/blue-flower-loader.gif') 
+                50% 50%
+                /*200px 200px*/
+                no-repeat;
+}
+
+/* When body has the loading class, turn the scrollbar off with overflow:hidden */
+/*#QuizResultsArea.loading { this did not work...*/
+body.loading {
+    overflow: hidden;   
+}
+
+/* Anytime body has the loading class, the loader-modal element will be visible */
+/*#QuizResultsArea.loading .loader-modal {*/
+body.loading .loader-modal {
+    display: block;
+}
+/*end not used*/
+
+/****************************/
+/* My additions - Login     */
+/****************************/
+
+.required-sign {
+    color: darkred;
+    font-size: 2em;
+}

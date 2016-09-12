@@ -1,0 +1,81 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Page - @ViewBag.Title</title>
+   
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+    @* this is from the bottom *@
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/bootstrap")
+
+    @* ***** tinyMCE Editor cdn ***** *@  
+    <script src='https://cdn.tinymce.com/4/tinymce.min.js'></script>
+    @* ***** tinyMCE end ************ *@
+    
+</head>
+<body id="admin-body">   
+
+    <div class="container body-content">
+
+        <nav class="navbar navbar-default admin-navbar-background">
+            
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse"
+                        data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Go to Site", "index", "Home", new { area = "" }, new { @class = "navbar-brand", id = "GoToSiteButton" })                         
+            </div>
+            
+            <div class="navbar-collapse collapse admin-navbar-background">              
+                
+                @*<ul class="nav navbar-nav nav-pills navbar">
+                    <li class="active">@Html.ActionLink("Go to Site", "index", "Home", new { area = "" }, new { @class = "navbar-brand", id = "GoToSiteButton" })</li>                                                                          
+                </ul>*@              
+
+                @using (Html.BeginForm("Search", "Home", FormMethod.Get, new { @class = "navbar-form navbar-right" }))
+                {             
+                    @Html.Editor("SearchTerm", new { htmlAttributes = new { @class = "form-control",
+                                                                            @placeholder = "Enter text to search",
+                                                                            @title = "Search the Questions and Answers data !",
+                                                                            data_toggle = "tooltip",
+                                                                            data_placement = "bottom"
+                                                                          } })                   
+                    <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search" aria-hidden="true"></span> Search</button>                    
+                }
+            </div>
+        </nav>
+        <hr />
+
+        <div class="well well-lg admin-well-lg">
+            @RenderBody()
+        </div>
+
+        <hr />
+
+        <footer>
+            <div class="row">
+                <span class="col-xs-12">&copy; @DateTime.Now.Year - Dev Quiz Application</span>
+                <span class="col-xs-12">Visitors to site:&nbsp;&nbsp;<span id="SiteVisitors"></span></span>
+                <span class="col-xs-12">Last Access Time:&nbsp;&nbsp;<span id="LastAccessTime"></span></span>
+            </div>
+        </footer>
+    </div>
+
+    @*@Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/bootstrap")*@
+
+    @RenderSection("scripts", required: false)
+
+    <script src="~/Scripts/admin.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,83 @@
+﻿@model DevQuiz.ViewModels.QuizResultsViewModel
+
+@{
+    ViewBag.Title = "Quiz Results";
+    string questionsString = Model.NumberOfCorrectQuestions == 1 ? "question" : "questions";
+}
+
+@* insert quizSessionId as hidden element *@
+@Html.HiddenFor(model => model.quizSessionId) 
+
+<div class="well">
+
+    <h2> Your @Model.SubCategoryName results: </h2>
+    <h4> @Model.NumberOfCorrectQuestions correct @questionsString out of @Model.TotalNumberOfQuestions</h4>
+    <h4> Score: @Model.Score</h4>
+    <br />
+
+    @{
+        for (int i = 0; i < Model.ResultsItems.Count; i++)
+        {
+            string numberString = (i + 1).ToString();
+
+            <div class="well well-sm result-well">
+
+                <div class="result-question"><span style="float: left">@numberString:&nbsp;&nbsp;</span>
+                                              @Html.Raw(Model.ResultsItems[i].QuestionText)
+                </div>
+
+                @{
+                    for (int j = 0; j < Model.ResultsItems[i].ResultsAnswersItems.Count; j++)
+                    {
+                        var answerItem = Model.ResultsItems[i].ResultsAnswersItems[j];
+
+                        if ((answerItem.IsCorrect) && (answerItem.SelectedByUser))
+                        {
+                            // green V, green background
+                            <div class="result-answer result-correct-answer correct-bg-color">                                
+                                <span class="result-icon icon-correct correct-color"></span>                               
+                                @Html.Raw(answerItem.AnswerText)
+                            </div>
+                        }
+                        if ((answerItem.IsCorrect) && (!answerItem.SelectedByUser))
+                        {
+                            // green V, white background
+                            <div class="result-answer natural-bg-color">                                
+                                <span class="result-icon icon-correct correct-color"></span>
+                                @Html.Raw(answerItem.AnswerText)
+                            </div>
+                        }
+                        if ((!answerItem.IsCorrect) && (answerItem.SelectedByUser))
+                        {
+                            // red X, red backgournd
+                            <div class="result-answer result-wrong-answer wrong-bg-color">                               
+                                <span class="result-icon icon-wrong wrong-color"></span>
+                                @Html.Raw(answerItem.AnswerText)
+                            </div>
+                        }
+                        if ((!answerItem.IsCorrect) && (!answerItem.SelectedByUser))
+                        {
+                            // red X, white backgournd
+                            <div class="result-answer natural-bg-color">                                
+                                <span class="result-icon icon-wrong wrong-color"></span>
+                                @Html.Raw(answerItem.AnswerText)
+                            </div>
+                        }
+                    }
+
+                    if (Model.ResultsItems[i].Explanation != null)
+                    {
+                        <div class="result-explanation">
+                            <h5><strong>Explanation:</strong></h5>                            
+                            <h6><span>@Html.Raw(Model.ResultsItems[i].Explanation)</span></h6>
+                        </div>
+                    }
+                }
+
+            </div>
+        }
+    }
+</div>
+
+
+

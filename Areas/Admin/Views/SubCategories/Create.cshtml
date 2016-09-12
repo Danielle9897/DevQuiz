@@ -1,0 +1,57 @@
+﻿@model DevQuiz.Areas.Admin.ViewModels.SubCategoryViewModel
+
+@{
+    ViewBag.Title = "Create SubCategory";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<ol class="breadcrumb">
+    <li>@Html.ActionLink("Admin Home", "Index", "Home")</li>
+    <li>@Html.ActionLink("Categories", "Index", "Categories")</li>
+    <li>@Html.ActionLink(Model.CategoryName, "Index", "SubCategories", new { id = @Model.CategoryId }, null)</li>
+    <li class="active">Create</li>
+</ol>
+<hr />
+
+<h2>Create New Sub-Category (For Category: @Model.CategoryName)</h2>
+
+@* Show a bootstrap alert:
+    For errors coming back from the server side,
+    (errors that were not checked by client javascript prior to posting to server) *@
+@if (!ViewData.ModelState.IsValid)
+{
+    <div class="alert alert-danger alert-dismissible fade in" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        @Html.ValidationSummary(true, "Please fix errors")
+    </div>
+}
+
+@using (Html.BeginForm())
+{
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <hr />       
+
+            @Html.HiddenFor(model => model.CategoryId)
+            @Html.HiddenFor(model => model.CategoryName)
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.SubCategoryName, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.SubCategoryName, new { htmlAttributes = new { @class = "form-control", @autofocus = "autofocus" } })              
+                    @Html.ValidationMessageFor(model => model.SubCategoryName, "", new { @class = "label label-danger" })
+                </div>
+            </div>                
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" class="btn btn-default btn-create-color" />
+                </div>
+            </div>
+
+    </div>
+}
+

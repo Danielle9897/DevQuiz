@@ -1,0 +1,131 @@
+﻿@model DevQuiz.ViewModels.QuizViewModel
+
+@{
+    ViewBag.Title = "Quiz Page";
+}
+<br /><br /><br /><br /><br />
+
+<div class="row">
+
+    <div class="col-md-3">
+
+        <div id="SubjectsMenu">
+            <div class="list-group panel">
+                @{
+                    for (int i = 0; i < Model.categoriesList.Count; i++)
+                    {
+                        string categoryName = Model.categoriesList[i].CategoryName;
+                        string categoryMenuItemId = "category" + i.ToString();
+                        string categoryMenuItemIdWithHash = "#" + categoryMenuItemId;
+
+                        <a href=@categoryMenuItemIdWithHash class="list-group-item list-group-item-success" data-toggle="collapse" data-parent="#SubjectsMenu">                           
+                           <span class="glyphicon glyphicon-triangle-bottom"></span>
+                           &nbsp;@categoryName
+                        </a>
+
+                        <div class="collapse" id=@categoryMenuItemId>
+                            @{ for (int j = 0; j < Model.categoriesList[i].subCategoriesList.Count; j++)
+                                {
+                                    string subCategoryName = Model.categoriesList[i].subCategoriesList[j].SubCategoryName;
+                                    string subCategoryMenuItemId = Model.categoriesList[i].subCategoriesList[j].SubCategoryId.ToString();
+                                    int numberOfQuestionsLevelNovice = Model.categoriesList[i].subCategoriesList[j].NumberOfQuestionsLevelNovice;
+                                    int numberOfQuestionsLevelIntermediate = Model.categoriesList[i].subCategoriesList[j].NumberOfQuestionsLevelIntermediate;
+                                    int numberOfQuestionsLevelExpert = Model.categoriesList[i].subCategoriesList[j].NumberOfQuestionsLevelExpert;
+
+                                    <a href="#" class="list-group-item selectedSubCategory" data-sub-category-Name='@subCategoryName'
+                                                                                            data-category-name='@categoryName' 
+                                                                                            data-sub-category-id=@subCategoryMenuItemId
+                                                                                            data-sub-category-number-of-questions-level-novice=@numberOfQuestionsLevelNovice
+                                                                                            data-sub-category-number-of-questions-level-intermediate=@numberOfQuestionsLevelIntermediate
+                                                                                            data-sub-category-number-of-questions-level-expert=@numberOfQuestionsLevelExpert
+                                                                                            > @subCategoryName </a>
+                                }
+                            }
+                        </div>
+                     }
+                }
+
+            </div>
+        </div>
+    </div>
+
+    <div id="QuestionAreaDiv" class="col-md-7 panel">
+
+        <div class="row">
+            <ul class="nav nav-justified">
+                <li class="active navbar-brand">                              
+                    <strong id="SubCategoryChosen"></strong>
+                </li>
+                <li id="SelectLevelOption" class="dropdown">
+                    <a href="#" class="dropdown-toggle selectedItem" data-toggle="dropdown"> Novice <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li id="Novice" class="drop-item"><a href="#" data-level-value="1"> Novice </a></li>
+                        <li id="Intermediate" class="drop-item"><a href="#" data-level-value="2"> Intermediate </a></li>
+                        <li id="Expert" class="drop-item"><a href="#" data-level-value="3"> Expert </a></li>
+                    </ul>
+                </li>
+                <li id="SelectTimeOption" class="dropdown">
+                    <a href="#" class="dropdown-toggle selectedItem" data-toggle="dropdown"> No Time Limit <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li class="drop-item"><a href="#" data-time-value="false"> No Time Limit </a></li>
+                        <li class="drop-item"><a href="#" data-time-value="true"> Time Limit </a></li>                        
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div class="row">
+            <div id="QuizResultsArea" class="hidden"></div>
+            <div id="QuestionPanelArea" class="panel panel-default">
+                <br /><br />
+                <div id="StartMessage" class="myCenter"><br /><h3>Select Quiz Subject from menu to start..</h3></div>
+                <button id="StartQuizButton" class="hidden btn btn-default btn-lg btn-danger center-block btn-huge myCenter">Start Quiz</button>
+
+                <div id="Loader" class="row hidden">
+                    <span class="col-sm-offset-4 col-xs-offset-2">
+                           Loading, please wait...&nbsp;&nbsp;
+                           <img alt="Loading, please wait.." src="~/Images/blue-flower-loader.gif" />
+                    </span>
+                </div>
+
+                <div id="QuestionArea" class="hidden">
+
+
+                    <div class="row">                        
+                        <p class="col-sm-offset-1 col-sm-1 col-xs-offset-5 col-xs-7"><span id="QuestionNumber">x</span>/<span id="TotalNumberOfQuestions">y</span></p>
+
+                        <button id="SubmitAnswerButton" class="btn btn-default btn-lg btn-danger hidden col-sm-offset-2 col-sm-4 col-xs-offset-3 col-xs-6" disabled>Submit Answer</button>
+                        <button id="NextQuestionButton" class="btn btn-default btn-lg btn-danger hidden col-sm-offset-2 col-sm-4 col-xs-offset-3 col-xs-6">Next Question</button>
+
+                        <p id="TimeElement" class="col-sm-offset-2 col-sm-2 col-xs-offset-5 col-xs-7"></p>
+                    </div>
+                    <br /><br />
+
+
+                    <div class="well well-lg question-well">                    
+                         <span id="QuestionText">Question text</span>
+                    </div>
+
+                    <ul id="AnswersArea" class="list-unstyled"></ul>
+
+                    <div id="ExplanationArea" class="well hidden"><h3>Explanation:</h3><span id="ExplanationText">Explanation text</span></div>                    
+
+                </div>
+
+            </div>            
+         
+         </div>
+
+    </div>
+
+    <div class="col-md-2">    
+        @*<div class="panel" style="background-color: rgb(223, 240, 216)">
+            <aside>Ads Area..</aside><br />
+        </div>*@      
+    </div>
+
+ </div>
+
+@*For the loader...now NOT used... using gif instead...*@
+@*<div class="loader-modal"></div>*@
+
